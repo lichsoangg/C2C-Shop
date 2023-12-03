@@ -1,0 +1,312 @@
+.chat-window {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  width: 360px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  z-index: 10000;
+  height: 538px;
+}
+.chatbot-icon {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 999;
+}
+.fade-loading {
+  width: 30px;
+  height: 30px;
+  background-color: #2cccff;
+  border-radius: 100rem;
+  margin: 10px auto;
+  position: relative;
+}
+
+.fade-loading:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background-color: inherit;
+  animation: fade 1s forwards infinite linear;
+}
+
+@keyframes fade {
+  to {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+.chat-window .chat-header {
+  background: linear-gradient(150.19deg, #0070ff 2.04%, #00afff 103.6%);
+  height: 58px;
+  padding: 10px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.chat-window .chat-name {
+  color: #ffffff;
+  margin-left: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
+}
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+.avatar-container {
+  margin-right: 10px;
+}
+.close-btn {
+  padding: 5px;
+  border: none;
+  margin-right: 15px;
+  background-color: transparent;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+}
+
+.close-btn::before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 2px;
+  margin-right: 5px;
+  background-color: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.chat-window .chat-body {
+  padding: 16px 16px 45px;
+  height: 420px;
+  overflow-y: scroll;
+  background-color: #f2f5fc;
+}
+.chat-container {
+  margin-bottom: 20px;
+}
+.chat-window .message {
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #ffffff;
+  color: #616e7c;
+  font-size: 13px;
+  font-weight: 400;
+  padding: 8px 10px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 11px;
+  border-bottom-right-radius: 11px;
+  border-bottom-left-radius: 5px;
+  max-width: 75%;
+  width: fit-content;
+  word-wrap: break-word;
+}
+
+.chat-window .message p {
+  margin: 0;
+}
+.react-input-emoji--container {
+  color: #616e7c;
+}
+.chat-window .message.text-user {
+  align-self: flex-end;
+  background: linear-gradient(150.19deg, #0070ff 2.04%, #00afff 103.6%);
+  color: #fff;
+  padding: 8px 10px;
+  border-top-left-radius: 14px;
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 14px;
+}
+@keyframes bounce-loader {
+  to {
+    transform: translateY(-0.5rem);
+  }
+}
+.send-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 36px;
+  height: 36px;
+  border-radius: 100rem;
+  background: linear-gradient(150.19deg, #0070ff 2.04%, #00afff 103.6%);
+}
+.send-btn img {
+  width: 20px;
+  height: 20px;
+}
+.bounce-loading {
+  display: flex;
+  justify-content: center;
+}
+
+.bounce-loading > div {
+  width: 5px;
+  height: 5px;
+  margin: 0 0.1rem;
+  background: #0038a8;
+  border-radius: 100%;
+  animation: bounce-loader 0.6s infinite alternate;
+}
+
+.bounce-loading > div:nth-child(2) {
+  background: #323f4b;
+  animation-delay: 0.15s;
+}
+
+.bounce-loading > div:nth-child(3) {
+  animation-delay: 0.3s;
+  background: #5497f4;
+}
+
+.bounce-loading > div:last-child {
+  animation-delay: 0.45s;
+}
+
+.chat-window .chat-footer {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  border-top: 1px solid #bdc3c7;
+  padding: 0 10px;
+}
+
+.chat_form-control {
+  flex: 1;
+  font-size: 13px;
+}
+.chat-window .chat_form-control > input {
+  border: none;
+  outline: none;
+}
+.react-input-emoji--input {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.chat_menu {
+  display: flex;
+  align-items: center;
+}
+.chat_menu_option {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px 10px 0 0;
+  background-color: #ffffff;
+  cursor: pointer;
+  display: block;
+  position: absolute;
+  width: 100%;
+  bottom: 11%;
+  transform: translateX(-10px);
+  z-index: 999;
+}
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.react-input-emoji--input {
+  font-size: 13px;
+  height: 40px;
+  padding: 10px;
+  overflow-y: auto !important;
+  max-width: 220px;
+}
+.react-input-emoji--container {
+  border-color: transparent;
+}
+.react-input-emoji--button {
+  transform: translateY(3px);
+}
+.react-input-emoji--placeholder {
+  font-size: 13px;
+}
+.react-input-emoji--input::-webkit-scrollbar {
+  display: none;
+}
+.react-input-emoji--container {
+  border: none !important;
+}
+
+.chat_menu_option-item {
+  display: flex;
+  align-items: center;
+  min-height: 38px;
+  width: 100%;
+  color: #000000;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0 10px;
+}
+.like-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  width: 24px;
+  height: 24px;
+  border-radius: 100rem;
+  margin-left: 5px;
+}
+.like-message img {
+  width: 15px;
+  height: 15px;
+}
+.option-message {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  top: 50%;
+}
+.btn-option {
+  border: none !important;
+  outline: none !important;
+  cursor: pointer;
+  padding: 5px;
+  background: transparent;
+}
+.chat-window .error-message {
+  text-align: center;
+  color: #ff0033;
+  font-weight: 400;
+}
+.chat-body::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
+}
+
+.chat-body::-webkit-scrollbar {
+  width: 6px;
+  background-color: #f5f5f5;
+}
+
+.chat-body::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background: linear-gradient(150.19deg, #0070ff 2.04%, #00afff 103.6%);
+}
