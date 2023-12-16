@@ -60,6 +60,10 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now(),
   },
+  recommendList: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Product'
+  }],
   resetPasswordToken: String,
   resetPasswordTime: Date,
 });
