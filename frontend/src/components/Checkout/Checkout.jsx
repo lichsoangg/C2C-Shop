@@ -7,7 +7,7 @@ import {useEffect} from 'react';
 import axios from 'axios';
 import {server} from '../../server';
 import {toast} from 'react-toastify';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const Checkout = () => {
   const {user} = useSelector((state) => state.user);
   const {cart} = useSelector((state) => state.cart);
@@ -204,7 +204,7 @@ const ShippingInfo = ({
               onChange={(e) => setCountry(e.target.value)}
             >
               <option className="block pb-2" value="">
-                Chọn quốc giá
+                Chọn quốc gia
               </option>
               {Country &&
                 Country.getAllCountries().map((item) => (
@@ -236,7 +236,7 @@ const ShippingInfo = ({
 
         <div className="w-full flex pb-3">
           <div className="w-[50%]">
-            <label className="block pb-2">Địa chỉ 1</label>
+            <label className="block pb-2">Quận/huyện</label>
             <input
               type="address"
               required
@@ -246,7 +246,7 @@ const ShippingInfo = ({
             />
           </div>
           <div className="w-[50%]">
-            <label className="block pb-2">Địa chỉ 2</label>
+            <label className="block pb-2">Số nhà, tên đường</label>
             <input
               type="address"
               value={address2}
@@ -304,21 +304,21 @@ const CartData = ({
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Tổng tiền:</h3>
-        <h5 className="text-[18px] font-[600]">{subTotalPrice} ₫</h5>
+        <h5 className="text-[18px] font-[600]">{formatVND(subTotalPrice)}</h5>
       </div>
       <br />
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Phí ship:</h3>
-        <h5 className="text-[18px] font-[600]">{shipping.toFixed(2)}₫</h5>
+        <h5 className="text-[18px] font-[600]">{formatVND(shipping)}</h5>
       </div>
       <br />
       <div className="flex justify-between border-b pb-3">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Giảm giá:</h3>
-        <h5 className="text-[18px] font-[600]">
-          - {discountPercentenge ? '₫' + discountPercentenge.toString() : null}
+        <h5 className="text-[18px] font-[600] text-blue-500">
+          - {discountPercentenge ? +discountPercentenge.toString() + ' ₫' : null}
         </h5>
       </div>
-      <h5 className="text-[18px] font-[600] text-end pt-3">{totalPrice}₫</h5>
+      <h5 className="text-[18px] font-[600] text-end pt-3">{formatVND(totalPrice)}</h5>
       <br />
       <form onSubmit={handleSubmit}>
         <input

@@ -9,7 +9,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getAllOrdersOfAdmin} from '../../redux/actions/order';
 import Loader from '../Layout/Loader';
 import {getAllSellers} from '../../redux/actions/sellers';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const AdminDashboardMain = () => {
   const dispatch = useDispatch();
 
@@ -68,7 +68,7 @@ const AdminDashboardMain = () => {
       row.push({
         id: item._id,
         itemsQty: item?.cart?.reduce((acc, item) => acc + item.qty, 0),
-        total: item?.totalPrice + ' $',
+        total: formatVND(item?.totalPrice),
         status: item?.status,
         createdAt: item?.createdAt.slice(0, 10),
       });
@@ -91,7 +91,7 @@ const AdminDashboardMain = () => {
                   Tổng thu nhập
                 </h3>
               </div>
-              <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{adminBalance} ₫</h5>
+              <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{formatVND(adminBalance)}</h5>
             </div>
 
             <div className="w-full mb-4 800px:w-[30%] min-h-[20vh] bg-white shadow rounded px-2 py-5">

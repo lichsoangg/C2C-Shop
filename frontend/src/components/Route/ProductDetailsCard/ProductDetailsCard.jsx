@@ -7,6 +7,10 @@ import {useDispatch, useSelector} from 'react-redux';
 import {toast} from 'react-toastify';
 import {addTocart} from '../../../redux/actions/cart';
 import {addToWishlist, removeFromWishlist} from '../../../redux/actions/wishlist';
+import {formatVND} from '../../../common/PriceFormat.js';
+import axios from 'axios';
+import {useNavigate, useParams} from 'react-router-dom';
+import {server} from '../../../server.js';
 
 const ProductDetailsCard = ({setOpen, data}) => {
   const {cart} = useSelector((state) => state.cart);
@@ -14,9 +18,32 @@ const ProductDetailsCard = ({setOpen, data}) => {
   const dispatch = useDispatch();
   const [count, setCount] = useState(1);
   const [click, setClick] = useState(false);
+  const {user, isAuthenticated} = useSelector((state) => state.user);
+  const navigate = useNavigate();
+
   //   const [select, setSelect] = useState(false);
 
-  const handleMessageSubmit = () => {};
+  const handleMessageSubmit = async () => {
+    if (isAuthenticated) {
+      const groupTitle = data._id + user._id;
+      const userId = user._id;
+      const sellerId = data.shop._id;
+      await axios
+        .post(`${server}/conversation/create-new-conversation`, {
+          groupTitle,
+          userId,
+          sellerId,
+        })
+        .then((res) => {
+          navigate(`/inbox?${res.data.conversation._id}`);
+        })
+        .catch((error) => {
+          toast.error(error.response.data.message);
+        });
+    } else {
+      toast.error('Please login to create a conversation');
+    }
+  };
 
   const decrementCount = () => {
     if (count > 1) {
@@ -92,11 +119,11 @@ const ProductDetailsCard = ({setOpen, data}) => {
                   className={`${styles.button} bg-[#000] mt-4 rounded-[4px] h-11`}
                   onClick={handleMessageSubmit}
                 >
-                  <span className="text-[#fff] flex items-center">
+                  <span className="text-[#fff] flex items-center" onClick={handleMessageSubmit}>
                     Gửi tin nhắn <AiOutlineMessage className="ml-1" />
                   </span>
                 </div>
-                <h5 className="text-[16px] text-[red] mt-5">(50) Đã bán</h5>
+                <h5 className="text-[16px] text-[red] mt-5"> {data?.sold_out} Đã bán</h5>
               </div>
 
               <div className="w-full 800px:w-[50%] pt-5 pl-[5px] pr-[5px]">
@@ -104,9 +131,11 @@ const ProductDetailsCard = ({setOpen, data}) => {
                 <p>{data.description}</p>
 
                 <div className="flex pt-3">
-                  <h4 className={`${styles.productDiscountPrice}`}>{data.discountPrice}₫</h4>
+                  <h4 className={`${styles.productDiscountPrice}`}>
+                    {formatVND(data.discountPrice)}
+                  </h4>
                   <h3 className={`${styles.price}`}>
-                    {data.originalPrice ? data.originalPrice + '₫' : null}
+                    {data.originalPrice ? formatVND(data.originalPrice) : null}
                   </h3>
                 </div>
                 <div className="flex items-center mt-12 justify-between pr-3">

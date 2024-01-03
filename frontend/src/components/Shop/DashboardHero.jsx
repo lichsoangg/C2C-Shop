@@ -8,7 +8,7 @@ import {getAllOrdersOfShop} from '../../redux/actions/order';
 import {getAllProductsShop} from '../../redux/actions/product';
 import {Button} from '@material-ui/core';
 import {DataGrid} from '@material-ui/data-grid';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const DashboardHero = () => {
   const dispatch = useDispatch();
   const {orders} = useSelector((state) => state.order);
@@ -20,7 +20,7 @@ const DashboardHero = () => {
     dispatch(getAllProductsShop(seller._id));
   }, [dispatch]);
 
-  const availableBalance = seller?.availableBalance.toFixed(2);
+  const availableBalance = seller?.availableBalance;
 
   const columns = [
     {field: 'id', headerName: 'Order ID', minWidth: 150, flex: 0.7},
@@ -78,7 +78,7 @@ const DashboardHero = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.reduce((acc, item) => acc + item.qty, 0),
-        total: item.totalPrice + '₫',
+        total: formatVND(item.totalPrice),
         status: item.status,
       });
     });
@@ -95,7 +95,7 @@ const DashboardHero = () => {
               Số dư tài khoản <span className="text-[16px]">(bao gồm 10% phí dịch vụ)</span>
             </h3>
           </div>
-          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{availableBalance} ₫</h5>
+          <h5 className="pt-2 pl-[36px] text-[22px] font-[500]">{formatVND(availableBalance)}</h5>
           <Link to="/dashboard-withdraw-money">
             <h5 className="pt-4 pl-[2] text-[#077f9c]">Rút tiền</h5>
           </Link>

@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {addTocart, removeFromCart} from '../../redux/actions/cart';
 import {toast} from 'react-toastify';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const Cart = ({setOpenCart}) => {
   const {cart} = useSelector((state) => state.cart);
   const dispatch = useDispatch();
@@ -63,7 +63,9 @@ const Cart = ({setOpenCart}) => {
               {/* checkout buttons */}
               <Link to="/checkout">
                 <div className={`${styles.button_2}`}>
-                  <h1 className="text-[#fff] text-[18px] font-[600]">Mua ngay ({totalPrice}) ₫</h1>
+                  <h1 className="text-[#fff] text-[18px] font-[600]">
+                    Mua ngay ({formatVND(totalPrice)})
+                  </h1>
                 </div>
               </Link>
             </div>
@@ -120,10 +122,10 @@ const CartSingle = ({data, quantityChangeHandler, removeFromCartHandler}) => {
         <div className="px-[5px]">
           <h1>{data.name}</h1>
           <h4 className="font-[400] text-[15px] text-[#00000082]">
-            {data.discountPrice} ₫ * {value}
+            {formatVND(data.discountPrice)} * {value}
           </h4>
           <h4 className="font-[600] text-[17px] pt-[3px] text-[#d02222] font-Roboto">
-            {totalPrice}₫
+            ({formatVND(totalPrice)})
           </h4>
         </div>
         <div

@@ -8,7 +8,7 @@ import {deleteEvent, getAllEventsShop} from '../../redux/actions/event';
 import {getAllProductsShop} from '../../redux/actions/product';
 import {deleteProduct} from '../../redux/actions/product';
 import Loader from '../Layout/Loader';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const AllEvents = () => {
   const {events, isLoading} = useSelector((state) => state.events);
   const {seller} = useSelector((state) => state.seller);
@@ -100,7 +100,7 @@ const AllEvents = () => {
       row.push({
         id: item._id,
         name: item.name,
-        price: item.discountPrice + '₫',
+        price: formatVND(item.discountPrice),
         Stock: item.stock,
         sold: item.sold_out,
       });

@@ -8,6 +8,7 @@ import {Button} from '@material-ui/core';
 import {Link} from 'react-router-dom';
 import {MdTrackChanges} from 'react-icons/md';
 import {RxCross1} from 'react-icons/rx';
+import {formatVND} from '../../common/PriceFormat.js';
 import {
   deleteUserAddress,
   loadUser,
@@ -256,7 +257,7 @@ const AllOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: item.totalPrice + '₫',
+        total: formatVND(item.totalPrice),
         status: item.status,
       });
     });
@@ -335,7 +336,7 @@ const AllRefundOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: item.totalPrice + '₫',
+        total: formatVND(item.totalPrice),
         status: item.status,
       });
     });
@@ -412,7 +413,7 @@ const TrackOrder = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: item.totalPrice + '₫',
+        total: formatVND(item.totalPrice),
         status: item.status,
       });
     });
@@ -555,7 +556,7 @@ const Address = () => {
               <form aria-required onSubmit={handleSubmit} className="w-full">
                 <div className="w-full block p-4">
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Country</label>
+                    <label className="block pb-2">Quốc gia</label>
                     <select
                       name=""
                       id=""
@@ -564,7 +565,7 @@ const Address = () => {
                       className="w-[95%] border h-[40px] rounded-[5px]"
                     >
                       <option value="" className="block border pb-2">
-                        choose your country
+                        Chọn quốc gia
                       </option>
                       {Country &&
                         Country.getAllCountries().map((item) => (
@@ -576,7 +577,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Choose your City</label>
+                    <label className="block pb-2">Thành phố</label>
                     <select
                       name=""
                       id=""
@@ -585,7 +586,7 @@ const Address = () => {
                       className="w-[95%] border h-[40px] rounded-[5px]"
                     >
                       <option value="" className="block border pb-2">
-                        choose your city
+                        Chọn thành phố
                       </option>
                       {State &&
                         State.getStatesOfCountry(country).map((item) => (
@@ -597,7 +598,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Address 1</label>
+                    <label className="block pb-2">Quận/huyện</label>
                     <input
                       type="address"
                       className={`${styles.input}`}
@@ -607,7 +608,7 @@ const Address = () => {
                     />
                   </div>
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Address 2</label>
+                    <label className="block pb-2">Xã/phường-Xóm</label>
                     <input
                       type="address"
                       className={`${styles.input}`}
@@ -629,7 +630,7 @@ const Address = () => {
                   </div>
 
                   <div className="w-full pb-2">
-                    <label className="block pb-2">Address Type</label>
+                    <label className="block pb-2">Kiểu địa chỉ</label>
                     <select
                       name=""
                       id=""
@@ -638,7 +639,7 @@ const Address = () => {
                       className="w-[95%] border h-[40px] rounded-[5px]"
                     >
                       <option value="" className="block border pb-2">
-                        Choose your Address Type
+                        Chọn kiểu địa chỉ
                       </option>
                       {addressTypeData &&
                         addressTypeData.map((item) => (

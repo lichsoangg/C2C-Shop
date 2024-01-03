@@ -1,5 +1,7 @@
 const express = require('express');
 const User = require('../model/user');
+const Product = require('../model/product');
+const Order = require('../model/order');
 const router = express.Router();
 const cloudinary = require('cloudinary');
 const ErrorHandler = require('../utils/ErrorHandler');
@@ -367,6 +369,83 @@ router.get(
     }
   })
 );
+
+const createRatingMatrix = async () => {
+  const products = await Product.find().lean();
+  const matrix = {};
+
+  products.forEach((product) => {
+    product.reviews.forEach((review) => {
+      if (!matrix[review.user._id]) {
+        matrix[review.user._id] = {};
+      }
+      matrix[review.user._id][product._id] = review.rating;
+    });
+  });
+
+  return matrix;
+};
+
+// Tính Độ Tương Đồng
+const calculateCosineSimilarity = (product1, product2, matrix) => {
+  let dotProduct = 0;
+  let normProduct1 = 0;
+  let normProduct2 = 0;
+
+  for (const user in matrix) {
+    if (matrix[user][product1] && matrix[user][product2]) {
+      dotProduct += matrix[user][product1] * matrix[user][product2];
+      normProduct1 += matrix[user][product1] * matrix[user][product1];
+      normProduct2 += matrix[user][product2] * matrix[user][product2];
+    }
+  }
+
+  if (normProduct1 === 0 || normProduct2 === 0) {
+    return 0;
+  }
+
+  return dotProduct / (Math.sqrt(normProduct1) * Math.sqrt(normProduct2));
+};
+
+// Đề Xuất Sản Phẩm
+router.get('/recommend/:userId', async (req, res) => {
+  try {
+    const userId = req.params.userId;
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({message: 'User not found'});
+    }
+
+    const ratingMatrix = await createRatingMatrix();
+
+    let recommendations = [];
+
+    for (let productId in ratingMatrix[userId]) {
+      let similarityScore = 0;
+      for (let otherProductId in ratingMatrix[userId]) {
+        if (otherProductId !== productId) {
+          similarityScore += calculateCosineSimilarity(productId, otherProductId, ratingMatrix);
+        }
+      }
+
+      if (similarityScore > 0) {
+        recommendations.push({productId, similarityScore});
+      }
+    }
+
+    recommendations.sort((a, b) => b.similarityScore - a.similarityScore);
+    const topRecommendations = recommendations.slice(0, 10).map((rec) => rec.productId);
+
+    const recommendedProducts = await Product.find({_id: {$in: topRecommendations}});
+
+    res.status(200).json({
+      success: true,
+      recommendList: recommendedProducts,
+    });
+  } catch (error) {
+    res.status(500).json({message: 'Server Error'});
+  }
+});
 
 // delete users --- admin
 router.delete(

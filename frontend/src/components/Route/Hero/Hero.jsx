@@ -13,15 +13,15 @@ const Hero = () => {
       <div className={`${styles.section} w-[90%] 800px:w-[60%]`}>
         <div className="shop__name">
           <div className="contents">
-            <h1 className="">LỊCH_SHOP</h1>
-            <h1 className="">LỊCH_SHOP</h1>
+            <h1 className="">C2C_SHOP</h1>
+            <h1 className="">C2C_SHOP</h1>
           </div>
         </div>
         <p className="pt-5 text-[16px] font-[400] text-[#000000ba]">
           Kết nối mọi người, mua sắm mọi lúc, mọi nơi!
           <br /> Trải nghiệm mua sắm độc đáo, kết nối người mua và người bán trực tiếp, tạo cơ hội
           mua sắm linh hoạt và tiện lợi mọi lúc, mọi nơi.
-          <br /> Hãy khám phá cách mua sắm mới đầy phong cách và tiện ích!
+          <p>Đem đến cho bạn những thứ bạn cần</p>
         </p>
         <Link
           to="/products"
@@ -44,9 +44,9 @@ const Hero = () => {
             </svg>
           </span>
           <span className="absolute flex items-center justify-center w-full h-full text-purple-500 transition-all duration-300 transform group-hover:translate-x-full ease">
-            Shop Now
+            Mua ngay
           </span>
-          <span className="relative invisible">Shop Now</span>
+          <span className="relative invisible">Mua ngay</span>
         </Link>
       </div>
     </div>

@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import styles from '../../styles/styles';
 import {useEffect} from 'react';
+import {formatVND} from '../../common/PriceFormat.js';
 import {
   CardNumberElement,
   CardCvcElement,
@@ -302,7 +303,7 @@ const PaymentInfo = ({
               </div>
               <input
                 type="submit"
-                value="Submit"
+                value="Đồng ý"
                 className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               />
             </form>
@@ -332,7 +333,7 @@ const PaymentInfo = ({
               className={`${styles.button} !bg-[#f63b60] text-white h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               onClick={() => setOpen(true)}
             >
-              Pay Now
+              Thanh toán
             </div>
             {open && (
               <div className="w-full fixed top-0 left-0 bg-[#00000039] h-screen flex items-center justify-center z-[99999]">
@@ -384,7 +385,7 @@ const PaymentInfo = ({
             <form className="w-full" onSubmit={cashOnDeliveryHandler}>
               <input
                 type="submit"
-                value="Confirm"
+                value="Xác nhận"
                 className={`${styles.button} !bg-[#f63b60] text-[#fff] h-[45px] rounded-[5px] cursor-pointer text-[18px] font-[600]`}
               />
             </form>
@@ -401,12 +402,12 @@ const CartData = ({orderData}) => {
     <div className="w-full bg-[#fff] rounded-md p-5 pb-8">
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Tổng thu:</h3>
-        <h5 className="text-[18px] font-[600]">{orderData?.subTotalPrice}₫</h5>
+        <h5 className="text-[18px] font-[600]">{formatVND(orderData?.subTotalPrice)}</h5>
       </div>
       <br />
       <div className="flex justify-between">
         <h3 className="text-[16px] font-[400] text-[#000000a4]">Phí ship:</h3>
-        <h5 className="text-[18px] font-[600]">{shipping} ₫</h5>
+        <h5 className="text-[18px] font-[600]">{formatVND(shipping)}</h5>
       </div>
       <br />
       <div className="flex justify-between border-b pb-3">
@@ -415,7 +416,7 @@ const CartData = ({orderData}) => {
           {orderData?.discountPrice ? ' ₫' + orderData.discountPrice : '-'}
         </h5>
       </div>
-      <h5 className="text-[18px] font-[600] text-end pt-3">{orderData?.totalPrice} ₫</h5>
+      <h5 className="text-[18px] font-[600] text-end pt-3">{formatVND(orderData?.totalPrice)} </h5>
       <br />
     </div>
   );

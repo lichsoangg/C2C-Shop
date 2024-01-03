@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {formatVND} from '../../common/PriceFormat.js';
 import {AiFillHeart, AiOutlineHeart, AiOutlineMessage, AiOutlineShoppingCart} from 'react-icons/ai';
 import {useDispatch, useSelector} from 'react-redux';
 import {Link, useNavigate} from 'react-router-dom';
@@ -21,6 +22,10 @@ const ProductDetails = ({data}) => {
   const [select, setSelect] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  // const price = data.discountPrice;
+  // console.log(price);
+  // const formattedPrice = formatVND(price);
   useEffect(() => {
     dispatch(getAllProductsShop(data && data?.shop._id));
     if (wishlist && wishlist.find((i) => i._id === data?._id)) {
@@ -128,9 +133,11 @@ const ProductDetails = ({data}) => {
                 <h1 className={`${styles.productTitle}`}>{data.name}</h1>
                 <p>{data.description}</p>
                 <div className="flex pt-3">
-                  <h4 className={`${styles.productDiscountPrice}`}>{data.discountPrice} ₫</h4>
+                  <h4 className={`${styles.productDiscountPrice}`}>
+                    {formatVND(data.discountPrice)}
+                  </h4>
                   <h3 className={`${styles.price}`}>
-                    {data.originalPrice ? data.originalPrice + ' ₫' : null}
+                    {data.originalPrice ? formatVND(data.originalPrice) : null}
                   </h3>
                 </div>
 
@@ -201,7 +208,7 @@ const ProductDetails = ({data}) => {
                     className={`${styles.button_3} bg-[#6443d1] mt-4 !rounded !h-11`}
                     onClick={handleMessageSubmit}
                   >
-                    <span className="text-white flex items-center">
+                    <span className="text-white flex items-center cursor-pointer">
                       Gửi tin nhắn <AiOutlineMessage className="ml-1" />
                     </span>
                   </div>
@@ -324,7 +331,7 @@ const ProductDetailsInfo = ({data, products, totalReviewsLength, averageRating})
               <h5 className="font-[600] pt-3">
                 Tổng số đánh giá: <span className="font-[500]">{totalReviewsLength}</span>
               </h5>
-              <Link to="/">
+              <Link to={`/shop/preview/${data?.shop._id}`}>
                 <div className={`${styles.button} !rounded-[4px] !h-[39.5px] mt-3`}>
                   <h4 className="text-white">Xem shop</h4>
                 </div>

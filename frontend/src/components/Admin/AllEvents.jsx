@@ -5,7 +5,7 @@ import React, {useEffect, useState} from 'react';
 import {AiOutlineEye} from 'react-icons/ai';
 import {Link} from 'react-router-dom';
 import {server} from '../../server';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const AllEvents = () => {
   const [events, setEvents] = useState([]);
   useEffect(() => {
@@ -71,7 +71,7 @@ const AllEvents = () => {
       row.push({
         id: item._id,
         name: item.name,
-        price: item.discountPrice + '₫',
+        price: formatVND(item.discountPrice),
         Stock: item.stock,
         sold: item.sold_out,
       });

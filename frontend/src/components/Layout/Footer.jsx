@@ -27,7 +27,7 @@ const Footer = () => {
       </div>
       <div className="grid grid-cols-1 sm:gird-cols-3 lg:grid-cols-4 gap-6 sm:px-8 px-5 py-16 sm:text-center">
         <ul className="px-5 text-center sm:text-start flex sm:block flex-col items-center">
-          <img src="/logo.jpg" alt="" />
+          <img src="/logoc2cbig.jpg" alt="" />
           <br />
           <p>Ở đây chúng tôi có thứ bạn cần</p>
           <div className="flex items-center mt-[15px]">
@@ -89,7 +89,7 @@ const Footer = () => {
          text-center pt-2 text-gray-400 text-sm pb-8"
       >
         <span>Lich soang</span>
-        <span>Lich shop</span>
+        <span>C2C shop</span>
         <div className="sm:block flex items-center justify-center w-full">
           <img
             src="https://hamart-shop.vercel.app/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Ffooter-payment.a37c49ac.png&w=640&q=75"
@@ -102,5 +102,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-

@@ -10,7 +10,7 @@ import Loader from '../Layout/Loader';
 import axios from 'axios';
 import {server} from '../../server';
 import {useState} from 'react';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const AllProducts = () => {
   const [data, setData] = useState([]);
 
@@ -77,7 +77,7 @@ const AllProducts = () => {
       row.push({
         id: item._id,
         name: item.name,
-        price: item.discountPrice + '₫',
+        price: formatVND(item.discountPrice),
         Stock: item.stock,
         sold: item?.sold_out,
       });

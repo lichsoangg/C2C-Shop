@@ -6,7 +6,7 @@ import {Link} from 'react-router-dom';
 import Loader from '../Layout/Loader';
 import {getAllOrdersOfShop} from '../../redux/actions/order';
 import {AiOutlineArrowRight} from 'react-icons/ai';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const AllOrders = () => {
   const {orders, isLoading} = useSelector((state) => state.order);
   const {seller} = useSelector((state) => state.seller);
@@ -73,7 +73,7 @@ const AllOrders = () => {
       row.push({
         id: item._id,
         itemsQty: item.cart.length,
-        total: item.totalPrice + '₫',
+        total: formatVND(item.totalPrice),
         status: item.status,
       });
     });

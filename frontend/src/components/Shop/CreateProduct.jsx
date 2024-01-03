@@ -162,7 +162,7 @@ const CreateProduct = () => {
         <br />
         <div>
           <label className="pb-2">
-            Giá (Có chiết khấu) <span className="text-red-500">*</span>
+            Giá khuyến mãi <span className="text-red-500">*</span>
           </label>
           <input
             type="number"

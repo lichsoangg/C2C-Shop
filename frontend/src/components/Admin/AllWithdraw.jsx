@@ -7,7 +7,7 @@ import {BsPencil} from 'react-icons/bs';
 import {RxCross1} from 'react-icons/rx';
 import styles from '../../styles/styles';
 import {toast} from 'react-toastify';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const AllWithdraw = () => {
   const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
@@ -89,7 +89,7 @@ const AllWithdraw = () => {
         {withCredentials: true}
       )
       .then((res) => {
-        toast.success('Withdraw request updated successfully!');
+        toast.success('Yêu cầu rút tiền thành công!');
         setData(res.data.withdraws);
         setOpen(false);
       });
@@ -103,7 +103,7 @@ const AllWithdraw = () => {
         id: item._id,
         shopId: item.seller._id,
         name: item.seller.name,
-        amount: item.amount + '₫',
+        amount: formatVND(item.amount),
         status: item.status,
         createdAt: item.createdAt.slice(0, 10),
       });

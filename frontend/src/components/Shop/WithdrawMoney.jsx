@@ -8,6 +8,7 @@ import {server} from '../../server';
 import {toast} from 'react-toastify';
 import {loadSeller} from '../../redux/actions/user';
 import {AiOutlineDelete} from 'react-icons/ai';
+import {formatVND} from '../../common/PriceFormat.js';
 
 const WithdrawMoney = () => {
   const [open, setOpen] = useState(false);
@@ -51,7 +52,7 @@ const WithdrawMoney = () => {
         {withCredentials: true}
       )
       .then((res) => {
-        toast.success('Withdraw method added successfully!');
+        toast.success('Thêm phương thức rút tiền thành công!');
         dispatch(loadSeller());
         setBankInfo({
           bankName: '',
@@ -73,7 +74,7 @@ const WithdrawMoney = () => {
         withCredentials: true,
       })
       .then((res) => {
-        toast.success('Withdraw method deleted successfully!');
+        toast.success('Xoá phươg thức rút tiền thành công!');
         dispatch(loadSeller());
       });
   };
@@ -100,7 +101,7 @@ const WithdrawMoney = () => {
   return (
     <div className="w-full h-[90vh] p-8">
       <div className="w-full bg-white h-full rounded flex items-center justify-center flex-col">
-        <h5 className="text-[20px] pb-4">Số dư khả dụng: {availableBalance} đồng</h5>
+        <h5 className="text-[20px] pb-4">Số dư khả dụng: {formatVND(availableBalance)}</h5>
         <div
           className={`${styles.button} text-white !h-[42px] !rounded`}
           onClick={() => (availableBalance < 50 ? error() : setOpen(true))}
@@ -125,12 +126,12 @@ const WithdrawMoney = () => {
             {paymentMethod ? (
               <div>
                 <h3 className="text-[22px] font-Poppins text-center font-[600]">
-                  Add new Withdraw Method:
+                  Thêm phương thức rút tiền:
                 </h3>
                 <form onSubmit={handleSubmit}>
                   <div>
                     <label>
-                      Bank Name <span className="text-red-500">*</span>
+                      Tên ngân hàng <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -145,7 +146,7 @@ const WithdrawMoney = () => {
                   </div>
                   <div className="pt-2">
                     <label>
-                      Bank Country <span className="text-red-500">*</span>
+                      Ngân hàng quốc gia <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -165,7 +166,7 @@ const WithdrawMoney = () => {
                   </div>
                   <div className="pt-2">
                     <label>
-                      Bank Swift Code <span className="text-red-500">*</span>
+                      Mã ngân hàng <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -186,7 +187,7 @@ const WithdrawMoney = () => {
 
                   <div className="pt-2">
                     <label>
-                      Bank Account Number <span className="text-red-500">*</span>
+                      Số tài khoản <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="number"
@@ -206,7 +207,7 @@ const WithdrawMoney = () => {
                   </div>
                   <div className="pt-2">
                     <label>
-                      Bank Holder Name <span className="text-red-500">*</span>
+                      Tên chủ thẻ <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -227,7 +228,7 @@ const WithdrawMoney = () => {
 
                   <div className="pt-2">
                     <label>
-                      Bank Address <span className="text-red-500">*</span>
+                      Địa chỉ ngân hàng<ng> </ng> <span className="text-red-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -247,7 +248,7 @@ const WithdrawMoney = () => {
                   </div>
 
                   <button type="submit" className={`${styles.button} mb-3 text-white`}>
-                    Add
+                    Thêm
                   </button>
                 </form>
               </div>
@@ -275,7 +276,7 @@ const WithdrawMoney = () => {
                       </div>
                     </div>
                     <br />
-                    <h4>Số dư khả dụng: {availableBalance} ₫</h4>
+                    <h4>Số dư khả dụng: {formatVND(availableBalance)} </h4>
                     <br />
                     <div className="800px:flex w-full items-center">
                       <input

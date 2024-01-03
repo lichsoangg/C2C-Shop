@@ -7,7 +7,7 @@ import {Link} from 'react-router-dom';
 import {getAllProductsShop} from '../../redux/actions/product';
 import {deleteProduct} from '../../redux/actions/product';
 import Loader from '../Layout/Loader';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const AllProducts = () => {
   const {products, isLoading} = useSelector((state) => state.products);
   const {seller} = useSelector((state) => state.seller);
@@ -97,7 +97,7 @@ const AllProducts = () => {
       row.push({
         id: item._id,
         name: item.name,
-        price: item.discountPrice + '₫',
+        price: formatVND(item.discountPrice),
         Stock: item.stock,
         sold: item?.sold_out,
       });

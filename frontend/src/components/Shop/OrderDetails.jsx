@@ -7,7 +7,7 @@ import {getAllOrdersOfShop} from '../../redux/actions/order';
 import {server} from '../../server';
 import axios from 'axios';
 import {toast} from 'react-toastify';
-
+import {formatVND} from '../../common/PriceFormat.js';
 const OrderDetails = () => {
   const {orders, isLoading} = useSelector((state) => state.order);
   const {seller} = useSelector((state) => state.seller);
@@ -33,7 +33,7 @@ const OrderDetails = () => {
         {withCredentials: true}
       )
       .then((res) => {
-        toast.success('Order updated!');
+        toast.success('Cập nhật trạng thái đơn hàng thành công!');
         navigate('/dashboard-orders');
       })
       .catch((error) => {
@@ -96,7 +96,7 @@ const OrderDetails = () => {
             <div className="w-full">
               <h5 className="pl-3 text-[20px]">{item.name}</h5>
               <h5 className="pl-3 text-[20px] text-[#00000091]">
-                {item.discountPrice}₫ x {item.qty}
+                {formatVND(item.discountPrice)} x {item.qty}
               </h5>
             </div>
           </div>
@@ -104,7 +104,7 @@ const OrderDetails = () => {
 
       <div className="border-t w-full text-right">
         <h5 className="pt-3 text-[18px]">
-          Tổng tiền: <strong>{data?.totalPrice} ₫</strong>
+          Tổng tiền: <strong>{formatVND(data?.totalPrice)} </strong>
         </h5>
       </div>
       <br />
@@ -182,7 +182,7 @@ const OrderDetails = () => {
           data?.status !== 'Processing refund' ? orderUpdateHandler : refundOrderUpdateHandler
         }
       >
-        Cập nhật trạng thái
+        Cập nhật
       </div>
     </div>
   );

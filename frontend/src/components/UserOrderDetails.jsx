@@ -9,7 +9,7 @@ import {RxCross1} from 'react-icons/rx';
 import {AiFillStar, AiOutlineStar} from 'react-icons/ai';
 import axios from 'axios';
 import {toast} from 'react-toastify';
-
+import {formatVND} from '../common/PriceFormat.js';
 const UserOrderDetails = () => {
   const {orders} = useSelector((state) => state.order);
   const {user} = useSelector((state) => state.user);
@@ -95,7 +95,7 @@ const UserOrderDetails = () => {
               <div className="w-full">
                 <h5 className="pl-3 text-[20px]">{item.name}</h5>
                 <h5 className="pl-3 text-[20px] text-[#00000091]">
-                  {item.discountPrice} x {item.qty}
+                  {formatVND(item.discountPrice)} x {item.qty}
                 </h5>
               </div>
               {!item.isReviewed && data?.status === 'Delivered' ? (
@@ -186,7 +186,7 @@ const UserOrderDetails = () => {
 
       <div className="border-t w-full text-right">
         <h5 className="pt-3 text-[18px]">
-          Tổng: <strong>{data?.totalPrice} ₫</strong>
+          Tổng: <strong>{formatVND(data?.totalPrice)}</strong>
         </h5>
       </div>
       <br />

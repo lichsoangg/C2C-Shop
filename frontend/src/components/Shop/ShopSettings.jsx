@@ -36,7 +36,7 @@ const ShopSettings = () => {
           )
           .then((res) => {
             dispatch(loadSeller());
-            toast.success('Avatar updated successfully!');
+            toast.success('Cập nhật avatar thành công!');
           })
           .catch((error) => {
             toast.error(error.response.data.message);

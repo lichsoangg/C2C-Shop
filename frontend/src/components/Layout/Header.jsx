@@ -53,7 +53,7 @@ const Header = ({activeHeading}) => {
         <div className="hidden 800px:h-[80px] 800px:my-[20px] 800px:flex items-center justify-between">
           <div>
             <Link to="/">
-              <img src="/logo.jpg" alt="" />
+              <img src="/logoc2cbig.jpg" alt="" />
             </Link>
           </div>
           {/* search box */}
@@ -118,7 +118,7 @@ const Header = ({activeHeading}) => {
                 className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                 type="button"
               >
-                All Categories
+                Danh mục
                 <svg
                   className="w-2.5 h-2.5 ml-2.5"
                   aria-hidden="true"
@@ -210,11 +210,7 @@ const Header = ({activeHeading}) => {
           </div>
           <div>
             <Link to="/">
-              <img
-                src="https://shopo.quomodothemes.website/assets/images/logo.svg"
-                alt=""
-                className="mt-3 cursor-pointer"
-              />
+              <img src="./logoc2c.jpg" alt="logoc2c" className="cursor-pointer" />
             </Link>
           </div>
           <div>
